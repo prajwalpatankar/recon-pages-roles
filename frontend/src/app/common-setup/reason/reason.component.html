@@ -1,0 +1,123 @@
+<section class="content">
+    <div class="container-fluid">
+        <div class="row clearfix">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="card" style="height: 79px;margin-top: -46px;width: 1090px;margin-left: -36px;">
+                    <div class="body">
+                        <div class="row clearfix">
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12" id="new_entry_title">
+                                <div class="header">
+                                    <h2>
+                                        <strong>Reason</strong>
+                                    </h2>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12" id="btn_list" style="text-align: right;">
+                                <div class="header">
+                                    <h2>
+                                        <button class="btn btn-primary btn-rounded waves-effect" type="button" (click)="showList();"><i class="fa fa-calendar"></i> List of Reasons</button>
+                                    </h2>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12" id="list_title">
+                                <div class="header">
+                                    <h2>
+                                        <strong>List of Reasons</strong>
+                                    </h2>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12" id="btn_new_entry" style="text-align: right;">
+                                <div class="header">
+                                    <h2>
+                                        <button class="btn btn-primary btn-rounded waves-effect" type="button" (click)="showNewEntry();"><i class="fa  fa-plus"></i>ADD NEW REJECTION REASON</button>
+                                    </h2>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div  id="new_entry_form">
+            <div class="row clearfix">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    
+                    <form [formGroup]="rejectionreasonForm" (ngSubmit)="onSubmit()">
+                        <div class="card">
+                            <div class="body">
+                                <div class="row clearfix">
+                                    <input type="hidden" formControlName="ID" id="ID" value="[ID]" class="form-control">
+                                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-8">
+                                        <div class="form-group">
+                                            <label>Reason Code</label>
+                                            <input type="text" formControlName="rej_reason_code" value="" placeholder="Enter Reason Code" class="form-control"
+                                                [ngClass]="{ 'is-invalid': submitted && f.rej_reason_code.errors }" />
+                                            <div *ngIf="submitted && f.rej_reason_code.errors" class="invalid-feedback">
+                                                <div *ngIf="f.rej_reason_code.errors.required">Reason Code is required</div>
+                                            </div>
+                                            
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-8">
+                                        <div class="form-group">
+                                            <label>Reason Description</label>
+                                            <input type="text" formControlName="rej_reason" value="" placeholder="Enter Reason Description" class="form-control"
+                                                [ngClass]="{ 'is-invalid': submitted && f.rej_reason.errors }" />
+                                            <div *ngIf="submitted && f.rej_reason.errors" class="invalid-feedback">
+                                                <div *ngIf="f.rej_reason.errors.required">Reason Description is required</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="body" style="text-align: center;">
+                                <div class="button-demo">
+
+                                    <button type="submit" class="btn btn-primary btn-border-radius waves-effect" value="Submit">
+                                    {{BTN_VAL}}</button>
+                                    <button type="button" class="btn btn-danger btn-border-radius waves-effect" onclick="location.reload(true);">Cancel</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div  id="list_form">
+            <div class="row clearfix">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="card">
+                        <div class="body">
+                            <div class="table-responsive">
+                                <table id="tableExport"
+                                    class="display table table-hover table-checkable order-column m-t-20 width-per-100">
+                                    <thead>
+                                        <tr>
+                                            <th>Action</th>
+                                            <th>Reason Code</th>
+                                            <th>Reason Description</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let row of rejectionreasondata">
+                                            <td>
+                                                <button class="btn btn-outline-success btn-border-radius" (click)="editRejectionReasonData(row)">Edit</button>
+                                                <button class="btn btn-outline-danger btn-border-radius" (click)="deleteRejectionReasonData(row)">Delete</button>
+                                            </td>
+                                            <td>{{row.rej_reason_code}}</td>
+                                            <td>{{row.rej_reason}}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

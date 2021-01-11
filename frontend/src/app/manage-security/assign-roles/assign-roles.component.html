@@ -1,0 +1,439 @@
+<!-- <section class="content">
+    <div class="container-fluid">
+        <div class="row clearfix">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="card" style="height: 79px;margin-top: -46px;width: 1090px;margin-left: -36px;">
+                    <div class="body">
+                        <div class="row clearfix">
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12" id="new_entry_title">
+                                <div class="header">
+                                    <h2>
+                                        <strong>Assign Roles</strong>
+                                    </h2>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12" id="btn_list" style="text-align: right;">
+                                <div class="header">
+                                    <h2>
+                                        <button class="btn btn-primary btn-rounded waves-effect" type="button"
+                                            (click)="showList();"><i class="fa fa-calendar"></i> List of Roles</button>
+                                    </h2>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12" id="list_title">
+                                <div class="header">
+                                    <h2>
+                                        <strong>List of Roles</strong>
+                                    </h2>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12" id="btn_new_entry"
+                                style="text-align: right;">
+                                <div class="header">
+                                    <h2>
+                                        <button class="btn btn-primary btn-rounded waves-effect" type="button"
+                                            (click)="showNewEntry();"><i class="fa  fa-plus"></i>Add New Role</button>
+                                    </h2>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="new_entry_form">
+            <div class="row clearfix">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <form [formGroup]="rolesForm" (ngSubmit)="onSubmit()">
+                        <div class="card">
+                            <div class="body">
+                                <div class="row clearfix">
+                                    <input type="hidden" formControlName="id" id="id" value="[id]" class="form-control">
+                                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-8">
+                                        <label class="form-label">Company Reference ID</label>
+                                            <div class="form-group">
+                                                <select class="form-control" formControlName="company_ref_id" id="Formref"
+                                                    [ngClass]="{ 'is-invalid': submitted && f.company_ref_id.errors }">
+                                                    <option value="null">Select Left Panel</option>
+                                                    <option *ngFor="let compref of companyrefdata" value="{{compref.id}}">
+                                                        {{ compref.id }}</option>
+                                                </select>
+                                                <div *ngIf="submitted && f.company_ref_id.errors" class="invalid-feedback">
+                                                    <div *ngIf="f.company_ref_id.errors.required">Company Reference ID is required</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-8">
+                                    <label class="form-label">Assign Pages Roles</label>
+                                        <div class="form-group">
+                                            <select class="form-control" formControlName="form_ref_id" id="Formref"
+                                                [ngClass]="{ 'is-invalid': submitted && f.form_ref_id.errors }">
+                                                <option value="null">Select Left Panel</option>
+                                                <option *ngFor="let formref of formrefdata" value="{{formref.id}}">
+                                                    {{ formref.form_name }}</option>
+                                            </select>
+                                            <div *ngIf="submitted && f.form_ref_id.errors" class="invalid-feedback">
+                                                <div *ngIf="f.form_ref_id.errors.required">Left Panel is required</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-8">
+                                        <div class="form-group">
+                                            <label class="form-label">Assigned to Role</label>
+                                            <input type="text" formControlName="assigned_to_role" placeholder="Enter Role" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.assigned_to_role.errors }" />
+                                            <div *ngIf="submitted && f.assigned_to_role.errors" class="invalid-feedback">
+                                                <div *ngIf="f.assigned_to_role.errors.required">Role is required</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row clearfix">
+                                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-8">
+                                        <div class="form-group">
+                                            <label class="form-label">Read Access</label>
+                                            <select class="form-control" formControlName="read_access" id="read_access"
+                                                [ngClass]="{ 'is-invalid': submitted && f.read_access.errors }">
+                                                <option value="null">Select Read Access</option>
+                                                <option *ngFor="let opt of accessopts" [value]="opt.value">{{opt.value}}
+                                                </option>
+                                            </select>
+                                            <div *ngIf="submitted && f.read_access.errors" class="invalid-feedback">
+                                                <div *ngIf="f.read_access.errors.required">This field is is required</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-8">
+                                        <div class="form-group">
+                                            <label class="form-label">Write-Edit Access</label>
+                                            <select class="form-control" formControlName="write_edit_access" id="write_edit_access"
+                                                [ngClass]="{ 'is-invalid': submitted && f.write_edit_access.errors }">
+                                                <option value="null">Select Write Access</option>
+                                                <option *ngFor="let opt of accessopts" [value]="opt.value">{{opt.value}}
+                                                </option>
+                                            </select>
+                                            <div *ngIf="submitted && f.write_edit_access.errors" class="invalid-feedback">
+                                                <div *ngIf="f.write_edit_access.errors.required">This field is is required</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-8">
+                                        <div class="form-group">
+                                            <label class="form-label">Delete Access</label>
+                                            <select class="form-control" formControlName="delete_access" id="delete_access"
+                                                [ngClass]="{ 'is-invalid': submitted && f.delete_access.errors }">
+                                                <option value="null">Select Delete Access</option>
+                                                <option *ngFor="let opt of accessopts" [value]="opt.value">{{opt.value}}
+                                                </option>
+                                            </select>
+                                            <div *ngIf="submitted && f.delete_access.errors" class="invalid-feedback">
+                                                <div *ngIf="f.delete_access.errors.required">This field is is required</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="body" style="text-align: center;">
+                                <div class="button-demo">
+                                    <button type="submit"
+                                        class="btn btn-primary btn-border-radius waves-effect">{{BTN_VAL}}</button>
+                                    <button type="button" class="btn btn-danger btn-border-radius waves-effect"
+                                        (click)="showList();">Cancel</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div id="list_form">
+            <div class="row clearfix">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="card">
+                        <div class="body">
+                            <div class="table-responsive">
+                                <table id="tableExport"
+                                    class="display table table-hover table-checkable order-column m-t-20 width-per-100">
+                                    <thead>
+                                        <tr>
+                                            <th>Action</th>
+                                            <th>Company Ref id</th>
+                                            <th>Assigned to Role</th>
+                                            <th>Parent Code</th>
+                                            <th>Child Code</th>
+                                            <th>Sub Child Code</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let row of roledata">
+                                            <td>
+                                                <button class="btn btn-outline-success btn-border-radius" (click)="editRole(row)">Edit</button>
+                                                <button class="btn btn-outline-danger btn-border-radius" (click)="deleteRoleData(row)">Delete</button>
+                                            </td>
+                                            <td>{{row.company_ref_id}}</td>
+                                            <td>{{row.assigned_to_role}}</td>
+                                            <td>{{row.parent_code}}</td>
+                                            <td>{{row.child_code}}</td>
+                                            <td>{{row.sub_child_code}}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section> -->
+
+
+<section class="content">
+    <div class="container-fluid">
+        <div class="row clearfix">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="card" style="height: 79px;margin-top: -46px;width: 1090px;margin-left: -36px;">
+                    <div class="body">
+                        <div class="row clearfix">
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12" id="new_entry_title">
+                                <div class="header">
+                                    <h2>
+                                        <strong>Assign Page to a Role</strong>
+                                    </h2>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12" id="btn_list" style="text-align: right;">
+                                <div class="header">
+                                    <h2>
+                                        <button class="btn btn-primary btn-rounded waves-effect" type="button" (click)="showList();"><i class="fa fa-calendar"></i> List of Pages</button>
+                                    </h2>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12" id="list_title">
+                                <div class="header">
+                                    <h2>
+                                        <strong>List of Pages assigned to roles </strong>
+                                    </h2>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12" id="btn_new_entry" style="text-align: right;">
+                                <div class="header">
+                                    <h2>
+                                        <button class="btn btn-primary btn-rounded waves-effect" type="button" (click)="showNewEntry();"><i class="fa  fa-plus"></i>Add New Role</button>
+                                    </h2>
+                                </div>
+                            </div>
+
+                        </div>
+                            <!-- <div class="col-sm-12">
+                                <mat-form-field appearance="fill">
+                                    <mat-label>
+                                    <i class="fa fa-search" aria-hidden="true"></i> 
+                                    Search
+                                    </mat-label>
+                                        <input matInput (keyup)='tbl_FilterDatatable($event)'>    
+                                </mat-form-field>
+                            </div> -->
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="new_entry_form">
+            <div class="row clearfix">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="card">
+                        <!-- <div class="header">
+                            <h2>Pages-Roles Form</h2> 
+                            <ul class="header-dropdown mr-5">
+                                <li class="dropdown">
+                                    <a href="#" onClick="return false;" data-toggle="dropdown" role="button"
+                                        aria-haspopup="true" aria-expanded="false">
+                                        <i class="material-icons">more_vert</i>
+                                    </a>
+                                    <ul class="dropdown-menu pull-right">
+                                        <li>
+                                            <a href="#" onClick="return false;">Action</a>
+                                        </li>
+                                        <li>
+                                            <a href="#" onClick="return false;">Another action</a>
+                                        </li>
+                                        <li>
+                                            <a href="#" onClick="return false;">Something else here</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div> -->
+                        <div class="body">
+                            <form class="register-form m-4" [formGroup]="rolesForm" (ngSubmit)="onSubmit()">
+                                
+                                <div class="row">
+                                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-8">
+                                        <label class="form-label">Company Reference ID</label>
+                                            <div class="form-group">
+                                                <select class="form-control" formControlName="company_ref_id" id="Formref"
+                                                    [ngClass]="{ 'is-invalid': submitted && f.company_ref_id.errors }">
+                                                    <option value="null">Select Left Panel</option>
+                                                    <option *ngFor="let compref of companyrefdata" value="{{compref.id}}">
+                                                        {{ compref.id }}</option>
+                                                </select>
+                                                <div *ngIf="submitted && f.company_ref_id.errors" class="invalid-feedback">
+                                                <div *ngIf="f.company_ref_id.errors.required">Company Reference ID is required</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">                                        
+                                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-8">
+                                        <label class="form-label">Role</label>  
+                                            <div class="form-group">
+                                                <select class="form-control" formControlName="assigned_to_role" id="Formref"
+                                                    [ngClass]="{ 'is-invalid': submitted && f.assigned_to_role.errors }">
+                                                    <option value="null">Select Role</option>
+                                                    <option *ngFor="let rrd of roleRefdata" value="{{rrd.id}}">
+                                                        {{ rrd.role_name }}</option>
+                                                </select>
+                                                <div *ngIf="submitted && f.assigned_to_role.errors" class="invalid-feedback">
+                                                <div *ngIf="f.assigned_to_role.errors.required">Company Reference ID is required</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                
+                                </div>
+                                <!-- <div class="row">
+                                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+                                        <button class="btn btn-primary btn-border-radius waves-effect" mat-raised-button
+                                            >Submit</button>
+                                        <button class="btn btn-danger btn-border-radius waves-effect" type="button" (click)="showList();" mat-button>Cancel</button>
+                                    </div>
+                                </div> -->
+                                <div class="row">   
+                                    <div class="table-responsive">
+                                        <table id="tableExport"
+                                            class="display table table-hover table-checkable order-column m-t-20 width-per-100">
+                                            <thead>
+                                                <tr>
+                                                    <th>MODULE</th>
+                                                    <th>CHILD</th>
+                                                    <th>PAGE</th>
+                                                    <th>READ</th>
+                                                    <th>WRITE</th>
+                                                    <th>DELETE</th>
+                                                    <th>SAVE</th>
+                                                </tr>
+                                            </thead>
+                                            
+
+                                            <tr *ngFor="let row of pagesOfLeftPanel; let i=index">
+                                                <td>{{ row.parent }}</td>
+                                                <td>{{ row.child }}</td>
+                                                <td>{{ row.form_name }}</td>
+                                                <td>
+                                                    <mat-checkbox class="example-margin" name="read_access{{i}}" 
+                                                    formControlName="read_access">
+                                                    </mat-checkbox>
+                                                </td>
+                                                <td>
+                                                    <mat-checkbox class="example-margin" name="write_edit_access{{i}}" 
+                                                    formControlName="write_edit_access">
+                                                    </mat-checkbox>
+                                                </td>
+                                                <td>
+                                                    <mat-checkbox class="example-margin" name="delete_access{{i}}" 
+                                                    formControlName="delete_access">
+                                                    </mat-checkbox>
+                                                </td>
+                                                <td>
+                                                <button type="button" class="btn-success btn-xs" (click)="saveRowData(row)">SAVE</button>
+                                                </td>
+                                                
+                                                <!-- <td>               
+                                                    <mat-checkbox class="example-margin" name="read_access{{i}}" [(ngModel)]="row.read_access" [checked]="row.read_access"
+                                                    formControlName="read_access">
+                                                    </mat-checkbox>
+                                                </td>
+                                                <td>
+                                                    <mat-checkbox class="example-margin" name="write_edit_access{{i}}" [(ngModel)]="row.write_edit_access" [checked]="row.write_edit_access"
+                                                    formControlName="write_edit_access">
+                                                    </mat-checkbox>
+                                                </td>
+                                                <td>
+                                                    <mat-checkbox class="example-margin" name="delete_access{{i}}" [(ngModel)]="row.delete_access" [checked]="row.delete_access"
+                                                    formControlName="delete_access">
+                                                    </mat-checkbox>
+                                                </td>
+                                                <td>
+                                                <button type="button" class="btn-success btn-xs" (click)="saveRowData(row)">SAVE</button>
+                                                </td> -->
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </div>
+
+
+
+                                    <!-- <div class="row">
+                                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                                            <mat-checkbox class="example-margin" [(ngModel)]="agree"
+                                                formControlName="termcondition">I accept terms
+                                                and conditions
+                                            </mat-checkbox>
+                                        </div>
+                                    </div> -->
+                                    <!-- <div class="row">
+                                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+                                            <button class="btn btn-primary btn-border-radius waves-effect" >Submit</button>
+                                            <button class="btn btn-danger btn-border-radius waves-effect" type="button" (click)="showList();" mat-button>Cancel</button>
+                                        </div>
+                                    </div> -->
+                                    
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> 
+        <div id="list_form">
+            <div class="row clearfix">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="card">
+                        <div class="body">
+                            <div class="table-responsive">
+                                    <ngx-datatable 
+                                        #tableExport class="material" [rows]="roledata" [columns]="tbl_columns"
+                                        [sortType]="'multi'" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50"
+                                        [rowHeight]="'auto'" [limit]="10">
+                                    
+                                        <ngx-datatable-column name="Actions" sortable="false" [width]="120">
+                                            <ng-template let-value="value" let-row="row" let-rowIndex="rowIndex"
+                                                ngx-datatable-cell-template>
+                                                <span>
+                                                    <button type="button" class="btn-danger btn-xs" (click)="deleteRowData(row)">Delete</button>
+                                                </span>
+                                            </ng-template>
+                                        </ngx-datatable-column>
+
+                                        <ngx-datatable-column name="MODULE" prop="parent_code"></ngx-datatable-column>
+                                        <ngx-datatable-column name="CHILD" prop="child_code"></ngx-datatable-column>
+                                        <ngx-datatable-column name="PAGE" prop="sub_child_code"></ngx-datatable-column>
+                                        <ngx-datatable-column name="READ" prop="read_access"></ngx-datatable-column>
+                                        <ngx-datatable-column name="WRITE" prop="write_edit_access"></ngx-datatable-column>
+                                        <ngx-datatable-column name="DELETE" prop="delete_access"></ngx-datatable-column>
+                                    </ngx-datatable>                                       
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
